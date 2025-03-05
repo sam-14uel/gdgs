@@ -17,6 +17,35 @@
       transform: scale(1.1);
       transition: transform 0.3s ease;
     }
+    /* Contact Info Styling */
+    .contact-info i {
+      color: #007bff;
+      margin-right: 10px;
+
+      text-decoration: none;
+      /* color: inherit; */
+    }
+    .contact-info a{
+      text-decoration: none;
+      color: inherit;
+    }
+    /* WhatsApp Icon Styling */
+    .contact-info .whatsapp-icon {
+      color: #25D366; /* WhatsApp green */
+      margin-right: 8px;
+    }
+
+    /* WhatsApp Link Styling */
+    .whatsapp-link {
+      color: inherit; /* Matches the text color of contact info */
+      text-decoration: none;
+      font-weight: bold;
+    }
+
+    .whatsapp-link:hover {
+      text-decoration: underline;
+    }
+
   </style>
 </head>
 <body>
@@ -51,7 +80,49 @@
   <section class="container my-4">
     <h1 class="text-center">Contact Us</h1>
     <p class="text-center">Get in touch to learn how GDGS can elevate your business.</p>
-    <div class="row justify-content-center">
+
+    <!-- Main Contact Section -->
+    <div class="row">
+      <!-- Contact Information Column -->
+      <div class="col-md-5">
+        <div class="mb-4">
+          <h3>Our Office</h3>
+          <p class="contact-info"><i class="fas fa-map-marker-alt"></i> I.J Plaza Beside Madonna Hospital, Aba Road, Umuahia, Abia State Nigeria</p>
+          <p class="contact-info">
+            <i class="fas fa-phone-alt"></i>
+            <a href="tel:07016300523">07016300523</a>
+          </p>
+          <p class="contact-info">
+            <i class="fas fa-envelope"></i>
+            <a href="mailto:gdgsourcing@gmail.com">gdgsourcing@gmail.com</a>
+          </p>
+          <p class="contact-info">
+            <i class="fab fa-whatsapp whatsapp-icon"></i>
+            <a href="https://wa.me/2347048785618" target="_blank" class="whatsapp-link">Chat on WhatsApp</a>
+          </p>
+        </div>
+        <div class="mb-4">
+          <h3>Business Hours</h3>
+          <p>Monday - Friday: 9:00 AM - 6:00 PM</p>
+          <p>Saturday - Sunday: Closed</p>
+
+          <!-- <p>Saturday: 10:00 AM - 4:00 PM</p>
+          <p>Sunday: Closed</p> -->
+
+        </div>
+        <!-- Social Icons -->
+        <!-- <div class="social-icons text-center">
+          <a href="https://facebook.com/yourprofile" target="_blank"><i class="fab fa-facebook"></i></a>
+          <a href="https://twitter.com/yourprofile" target="_blank"><i class="fab fa-twitter"></i></a>
+          <a href="https://instagram.com/yourprofile" target="_blank"><i class="fab fa-instagram"></i></a>
+          <a href="https://linkedin.com/yourprofile" target="_blank"><i class="fab fa-linkedin"></i></a>
+          <a href="https://wa.me/2347048785618" target="_blank" class="text-white me-3 whatsapp">
+            <i class="fab fa-whatsapp fa-2x"></i>
+          </a>
+        </div> -->
+      </div>
+
+    <!-- <div class="row justify-content-center">
       <div class="col-md-8">
         <form id="contactForm">
           <div class="mb-3">
@@ -71,24 +142,8 @@
           </div>
         </form>
       </div>
-    </div>
+    </div> -->
   </section>
-
-  <!-- Social Icons -->
-  <div class="text-center mt-4">
-    <a href="https://facebook.com/yourprofile" target="_blank" class="text-white me-3">
-      <i class="fab fa-facebook fa-2x"></i>
-    </a>
-    <a href="https://twitter.com/yourprofile" target="_blank" class="text-white me-3">
-      <i class="fab fa-twitter fa-2x"></i>
-    </a>
-    <a href="https://instagram.com/yourprofile" target="_blank" class="text-white me-3">
-      <i class="fab fa-instagram fa-2x"></i>
-    </a>
-    <a href="https://linkedin.com/yourprofile" target="_blank" class="text-white">
-      <i class="fab fa-linkedin fa-2x"></i>
-    </a>
-  </div>
 
   <!-- Footer -->
   <footer class="bg-dark text-white text-center py-3">
@@ -96,13 +151,54 @@
   </footer>
 
   <!-- Bootstrap JS Bundle with Popper -->
-  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
-  <script>
+  <!-- <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script> -->
+  <script src="js/bootstrap.bundle.min.js"></script>
+  <!-- <script>
     document.getElementById('contactForm').addEventListener('submit', function(e) {
       e.preventDefault();
       alert('Thanks for reaching out! We’ll circle back ASAP.');
       this.reset();
     });
+
+    document.getElementById("contactForm").addEventListener("submit", async function (e) {
+        e.preventDefault();
+
+        // Get form values
+        let name = document.getElementById("name").value;
+        let email = document.getElementById("email").value;
+        let message = document.getElementById("message").value;
+
+        // Brevo API request
+        let response = await fetch("https://api.brevo.com/v3/smtp/email", {
+            method: "POST",
+            headers: {
+                "Content-Type": "application/json",
+                "api-key": ""
+            },
+            body: JSON.stringify({
+                sender: { name: "", email: "your@email.com" }, // Change this to your website's email
+                to: [{ email: "", name: "" }], // Replace with your client's email
+                subject: "New Contact Form Submission",
+                htmlContent: `
+                    <h3>New Message from Contact Form</h3>
+                    <p><strong>Name:</strong> ${name}</p>
+                    <p><strong>Email:</strong> ${email}</p>
+                    <p><strong>Message:</strong></p>
+                    <p>${message}</p>
+                `
+            })
+        });
+
+        let result = await response.json();
+
+        if (response.ok) {
+            alert("Message sent successfully!");
+            document.getElementById("contactForm").reset(); // Clear form after submission
+        } else {
+            alert("Error sending message: " + result.message);
+        }
+    }); -->
+
   </script>
 </body>
 </html>
